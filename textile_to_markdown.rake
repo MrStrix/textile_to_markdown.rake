@@ -74,7 +74,7 @@ namespace :redmine do
       def self.update_content(model, attribute, where)
         total = model.where("#{where}").count
         model.where("#{where}").each_with_index do |rec, ix|
-          if !rec[attribute].empty? then
+          if rec[attribute] && !rec[attribute].empty? then
             markdowned = textile_to_markdown(rec[attribute])
             markdowned = cleanup_md(markdowned, model)
             if markdowned != rec[attribute] then
